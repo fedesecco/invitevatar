@@ -34,9 +34,9 @@
       "unitTestRunner": "none"
     },
     "@nx/angular:component": {
+      "style": "scss",
       "changeDetection": "OnPush",
       "skipTests": true,
-      "style": "scss",
       "path": "apps/invitevatar/src/app/views/"
     }
   }
