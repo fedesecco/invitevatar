@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/apps/invitevatar",
         "browser": "apps/invitevatar/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [],
         "tsConfig": "apps/invitevatar/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
