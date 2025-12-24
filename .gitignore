@@ -38,6 +38,12 @@ testem.log
 .DS_Store
 Thumbs.db
 
+.env
+.env.*
+!.env.example
+apps/api/.env.local
+apps/api/.env
+
 .nx/cache
 .nx/workspace-data
 .cursor/rules/nx-rules.mdc
