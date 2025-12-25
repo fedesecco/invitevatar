@@ -1,1 +1,12 @@
-<p>landing works!</p>
+<section class="hero">
+  <div class="copy">
+    <h1>Bring your event to life with an Invitevatar</h1>
+    <p>Create an AI host, let guests chat, and share your invite with one link.</p>
+    <button class="cta" type="button" (click)="startLogin()">
+      @if (isAuthenticated()) { Continue } @else { Create your Invitevatar }
+    </button>
+    @if (user()) {
+      <p class="welcome">Welcome back, {{ user()?.email }}.</p>
+    }
+  </div>
+</section>
