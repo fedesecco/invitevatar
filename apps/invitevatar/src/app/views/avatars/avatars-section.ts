@@ -5,19 +5,8 @@ import { TranslocoDirective } from '@jsverse/transloco';
   selector: 'app-avatars-section',
   standalone: true,
   imports: [TranslocoDirective],
-  template: `
-    <section class="section" *transloco="let t">
-      <h2>{{ t('home.sections.avatars.title') }}</h2>
-      <p>{{ t('home.sections.avatars.description') }}</p>
-    </section>
-  `,
-  styles: [
-    `
-      .section {
-        padding: 1.5rem;
-      }
-    `,
-  ],
+  templateUrl: './avatars-section.html',
+  styleUrl: './avatars-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarsSectionComponent {}

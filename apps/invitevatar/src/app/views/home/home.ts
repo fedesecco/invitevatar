@@ -10,10 +10,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ToolbarComponent } from '@app/components/toolbar/toolbar';
 import { AuthService } from '@app/services/auth.service';
+import { ApiKeysSectionComponent } from '@app/views/api-keys/api-keys-section';
+import { AvatarsSectionComponent } from '@app/views/avatars/avatars-section';
+import { SettingsSectionComponent } from '@app/views/settings/settings-section';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { ApiKeysSectionComponent } from '@views/home/sections/api-keys-section';
-import { AvatarsSectionComponent } from '@views/home/sections/avatars-section';
-import { SettingsSectionComponent } from '@views/home/sections/settings-section';
 
 type SectionKey = 'avatars' | 'settings' | 'api-keys';
 
