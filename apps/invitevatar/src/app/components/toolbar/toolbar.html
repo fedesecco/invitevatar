@@ -1,10 +1,9 @@
 <header class="toolbar" *transloco="let t">
-  @if(showMenu){
+  @if(showMenuToggle()){
   <button
     class="menu-button"
     type="button"
     [attr.aria-label]="t('toolbar.aria.menu')"
-    (click)="openMenu()"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
@@ -22,9 +21,9 @@
     <button
       class="theme-toggle"
       (click)="toggleTheme()"
-      [attr.aria-label]="t(isDarkMode() ? 'toolbar.theme.light' : 'toolbar.theme.dark')"
+      [attr.aria-label]="t(themeService.isDarkMode() ? 'toolbar.theme.light' : 'toolbar.theme.dark')"
     >
-      @if (isDarkMode()) {
+      @if (themeService.isDarkMode()) {
       <!-- Sun Icon -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path

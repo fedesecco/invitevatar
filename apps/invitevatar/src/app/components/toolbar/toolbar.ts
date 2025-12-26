@@ -1,14 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
+  booleanAttribute,
   inject,
+  input,
 } from '@angular/core';
-import { ThemeService } from '@services/theme.service';
 import { AuthButtonComponent } from '@components/auth-button/auth-button';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { ThemeService } from '@services/theme.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,17 +18,13 @@ import { TranslocoDirective } from '@jsverse/transloco';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
-  @Input() showMenu = false;
-  @Output() menuClicked = new EventEmitter<void>();
-  private themeService = inject(ThemeService);
+  protected readonly themeService = inject(ThemeService);
 
-  isDarkMode = this.themeService.isDarkMode;
+  public readonly showMenuToggle = input(false, {
+    transform: booleanAttribute,
+  });
 
   toggleTheme() {
     this.themeService.toggleTheme();
-  }
-
-  openMenu() {
-    this.menuClicked.emit();
   }
 }

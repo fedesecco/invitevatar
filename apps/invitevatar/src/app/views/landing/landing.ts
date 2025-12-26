@@ -5,13 +5,14 @@ import {
   inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToolbarComponent } from '@app/components/toolbar/toolbar';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [TranslocoDirective],
+  imports: [TranslocoDirective, ToolbarComponent],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

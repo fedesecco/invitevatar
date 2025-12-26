@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ToolbarComponent } from './components/toolbar/toolbar';
-
 @Component({
-  imports: [RouterModule, ToolbarComponent],
+  imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-
-}
+export class App {}
