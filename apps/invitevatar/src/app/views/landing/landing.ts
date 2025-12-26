@@ -5,8 +5,8 @@ import {
   inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@services/auth.service';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-landing',
@@ -23,14 +23,14 @@ export class Landing implements OnInit {
   isAuthenticated = this.auth.isAuthenticated;
   user = this.auth.user;
 
-  startLogin() {
-    this.auth.signInWithGoogle();
-  }
-
   async ngOnInit() {
     await this.auth.ready();
     if (this.auth.isAuthenticated()) {
       await this.router.navigateByUrl('/home');
     }
+  }
+
+  protected onCtaClick() {
+    this.router.navigateByUrl('/home');
   }
 }
