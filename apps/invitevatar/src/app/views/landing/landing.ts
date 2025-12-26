@@ -6,6 +6,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolbarComponent } from '@app/components/toolbar/toolbar';
+import { NavigationService } from '@app/services/navigation.service';
+import { Section } from '@app/shared/constants';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { AuthService } from '@services/auth.service';
 
@@ -20,6 +22,7 @@ import { AuthService } from '@services/auth.service';
 export class Landing implements OnInit {
   private auth = inject(AuthService);
   private router = inject(Router);
+  private navigation = inject(NavigationService);
 
   isAuthenticated = this.auth.isAuthenticated;
   user = this.auth.user;
@@ -27,11 +30,11 @@ export class Landing implements OnInit {
   async ngOnInit() {
     await this.auth.ready();
     if (this.auth.isAuthenticated()) {
-      await this.router.navigateByUrl('/home');
+      await this.navigation.goToSection(Section.avatars);
     }
   }
 
   protected onCtaClick() {
-    this.router.navigateByUrl('/home');
+    this.navigation.goToSection(Section.avatars);
   }
 }
