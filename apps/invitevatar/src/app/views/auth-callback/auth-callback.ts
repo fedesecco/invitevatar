@@ -1,17 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth-callback',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <section class="auth-callback">
       <p>Signing you in…</p>
       @if (error) {
-        <p class="error">Auth failed: {{ error }}</p>
+      <p class="error">Auth failed: {{ error }}</p>
       }
     </section>
   `,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +14,6 @@ type SectionKey = 'avatars' | 'settings' | 'api-keys';
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule,
     MatSidenavModule,
     MatListModule,
     MatButtonModule,

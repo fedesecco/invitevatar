@@ -1,19 +1,18 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <button class="auth-btn" type="button" (click)="onClick()">
       @if (auth.isAuthenticated()) {
-        <span class="avatar-circle">{{ initials(auth.user()?.email) }}</span>
-        <span>{{ auth.user()?.email }}</span>
-        <span class="action">Sign out</span>
+      <span class="avatar-circle">{{ initials(auth.user()?.email) }}</span>
+      <span>{{ auth.user()?.email }}</span>
+      <span class="action">Sign out</span>
       } @else {
-        <span class="action">Login with Google</span>
+      <span class="action">Login with Google</span>
       }
     </button>
   `,

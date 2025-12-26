@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,22 +6,22 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { AuthButtonComponent } from '../auth-button/auth-button';
 import { ThemeService } from '../../services/theme.service';
+import { AuthButtonComponent } from '../auth-button/auth-button';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [CommonModule, AuthButtonComponent],
+  imports: [AuthButtonComponent],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
   @Input() showMenu = false;
   @Output() menuClicked = new EventEmitter<void>();
   private themeService = inject(ThemeService);
-  
+
   isDarkMode = this.themeService.isDarkMode;
 
   toggleTheme() {

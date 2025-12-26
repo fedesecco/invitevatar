@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-api-keys-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <section class="section">
       <h2>API Keys</h2>
