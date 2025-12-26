@@ -1,4 +1,15 @@
 <header class="toolbar">
+  <button
+    *ngIf="showMenu"
+    class="menu-button"
+    type="button"
+    aria-label="Toggle menu"
+    (click)="openMenu()"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
   <div class="brand">Invitevatar</div>
   <div class="actions">
     <app-auth-button></app-auth-button>

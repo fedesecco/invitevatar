@@ -30,6 +30,30 @@
   }
 }
 
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--md-sys-color-on-surface-variant);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  margin-right: 0.75rem;
+
+  &:hover {
+    background-color: var(--md-sys-color-surface-variant);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+}
+
 .theme-toggle {
   background: none;
   border: none;

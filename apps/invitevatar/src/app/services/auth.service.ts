@@ -17,9 +17,10 @@ export class AuthService {
   private readonly sessionSignal = signal<Session | null>(null);
   public readonly user = computed(() => this.sessionSignal()?.user ?? null);
   public readonly isAuthenticated = computed(() => !!this.user());
+  private readonly readyPromise: Promise<void>;
 
   constructor() {
-    this.bootstrapSession();
+    this.readyPromise = this.bootstrapSession();
 
     // Keep local state in sync with auth events.
     effect((onCleanup) => {
@@ -35,6 +36,10 @@ export class AuthService {
     if (!error) {
       this.sessionSignal.set(data.session);
     }
+  }
+
+  public async ready(): Promise<void> {
+    await this.readyPromise;
   }
 
   public signInWithGoogle(): Promise<OAuthResponse> {

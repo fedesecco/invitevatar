@@ -37,8 +37,13 @@ export class AuthCallbackComponent implements OnInit {
 
   async ngOnInit() {
     try {
+      // If already authenticated, just leave the callback page.
+      if (this.auth.isAuthenticated()) {
+        await this.router.navigateByUrl('/home');
+        return;
+      }
       await this.auth.handleCallbackFromUrl(window.location.href);
-      await this.router.navigateByUrl('/');
+      await this.router.navigateByUrl('/home');
     } catch (err) {
       this.error =
         err instanceof Error ? err.message : 'Could not complete sign-in';
