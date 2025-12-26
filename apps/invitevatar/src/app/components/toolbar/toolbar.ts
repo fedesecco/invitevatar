@@ -6,8 +6,8 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { ThemeService } from '../../services/theme.service';
-import { AuthButtonComponent } from '../auth-button/auth-button';
+import { ThemeService } from '@services/theme.service';
+import { AuthButtonComponent } from '@components/auth-button/auth-button';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({

@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '@services/auth.service';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 @Component({

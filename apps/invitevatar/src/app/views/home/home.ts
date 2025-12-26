@@ -3,10 +3,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { ToolbarComponent } from '../../components/toolbar/toolbar';
-import { ApiKeysSectionComponent } from './sections/api-keys-section';
-import { AvatarsSectionComponent } from './sections/avatars-section';
-import { SettingsSectionComponent } from './sections/settings-section';
+import { ToolbarComponent } from '@components/toolbar/toolbar';
+import { ApiKeysSectionComponent } from '@views/home/sections/api-keys-section';
+import { AvatarsSectionComponent } from '@views/home/sections/avatars-section';
+import { SettingsSectionComponent } from '@views/home/sections/settings-section';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 type SectionKey = 'avatars' | 'settings' | 'api-keys';
