@@ -1,1 +1,57 @@
-{}
+{
+  "app": {
+    "name": "Invitevatar"
+  },
+  "toolbar": {
+    "brand": "Invitevatar",
+    "aria": {
+      "menu": "Toggle menu"
+    },
+    "theme": {
+      "light": "Switch to light mode",
+      "dark": "Switch to dark mode"
+    }
+  },
+  "auth": {
+    "actions": {
+      "signOut": "Sign out",
+      "loginGoogle": "Login with Google"
+    },
+    "welcomeBack": "Welcome back, {{email}}."
+  },
+  "landing": {
+    "title": "Bring your event to life with an Invitevatar",
+    "subtitle": "Create an AI host, let guests chat, and share your invite with one link.",
+    "cta": {
+      "continue": "Continue",
+      "create": "Create your Invitevatar"
+    }
+  },
+  "home": {
+    "nav": {
+      "workspace": "Workspace",
+      "avatars": "Avatars",
+      "settings": "Settings",
+      "apiKeys": "API Keys"
+    },
+    "sections": {
+      "avatars": {
+        "title": "Avatars",
+        "description": "Avatar management coming soon."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Settings will live here."
+      },
+      "apiKeys": {
+        "title": "API Keys",
+        "description": "API keys and integrations will appear here."
+      }
+    }
+  },
+  "authCallback": {
+    "signingIn": "Signing you in...",
+    "error": "Auth failed: {{error}}",
+    "genericError": "Could not complete sign-in"
+  }
+}

@@ -1,1 +1,57 @@
-{}
+{
+  "app": {
+    "name": "Invitevatar"
+  },
+  "toolbar": {
+    "brand": "Invitevatar",
+    "aria": {
+      "menu": "Apri o chiudi il menu"
+    },
+    "theme": {
+      "light": "Passa al tema chiaro",
+      "dark": "Passa al tema scuro"
+    }
+  },
+  "auth": {
+    "actions": {
+      "signOut": "Esci",
+      "loginGoogle": "Accedi con Google"
+    },
+    "welcomeBack": "Bentornato, {{email}}."
+  },
+  "landing": {
+    "title": "Dai vita al tuo evento con un Invitevatar",
+    "subtitle": "Crea un host AI, lascia che gli invitati chattino e condividi l'invito con un unico link.",
+    "cta": {
+      "continue": "Continua",
+      "create": "Crea il tuo Invitevatar"
+    }
+  },
+  "home": {
+    "nav": {
+      "workspace": "Spazio di lavoro",
+      "avatars": "Avatar",
+      "settings": "Impostazioni",
+      "apiKeys": "Chiavi API"
+    },
+    "sections": {
+      "avatars": {
+        "title": "Avatar",
+        "description": "La gestione degli avatar arrivera presto."
+      },
+      "settings": {
+        "title": "Impostazioni",
+        "description": "Qui troverai le impostazioni."
+      },
+      "apiKeys": {
+        "title": "Chiavi API",
+        "description": "Qui troverai le chiavi API e le integrazioni."
+      }
+    }
+  },
+  "authCallback": {
+    "signingIn": "Accesso in corso...",
+    "error": "Autenticazione non riuscita: {{error}}",
+    "genericError": "Impossibile completare l'accesso"
+  }
+}

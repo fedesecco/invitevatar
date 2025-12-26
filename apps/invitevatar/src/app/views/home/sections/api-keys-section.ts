@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-api-keys-section',
   standalone: true,
-  imports: [],
+  imports: [TranslocoDirective],
   template: `
-    <section class="section">
-      <h2>API Keys</h2>
-      <p>API keys and integrations will appear here.</p>
+    <section class="section" *transloco="let t">
+      <h2>{{ t('home.sections.apiKeys.title') }}</h2>
+      <p>{{ t('home.sections.apiKeys.description') }}</p>
     </section>
   `,
   styles: [

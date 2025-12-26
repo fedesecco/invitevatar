@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { AuthButtonComponent } from '../auth-button/auth-button';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [AuthButtonComponent],
+  imports: [AuthButtonComponent, TranslocoDirective],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

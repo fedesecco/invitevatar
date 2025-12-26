@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-settings-section',
   standalone: true,
-  imports: [],
+  imports: [TranslocoDirective],
   template: `
-    <section class="section">
-      <h2>Settings</h2>
-      <p>Settings will live here.</p>
+    <section class="section" *transloco="let t">
+      <h2>{{ t('home.sections.settings.title') }}</h2>
+      <p>{{ t('home.sections.settings.description') }}</p>
     </section>
   `,
   styles: [

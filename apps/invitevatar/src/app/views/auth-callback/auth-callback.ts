@@ -6,16 +6,19 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-auth-callback',
   standalone: true,
-  imports: [],
+  imports: [TranslocoDirective],
   template: `
-    <section class="auth-callback">
-      <p>Signing you in…</p>
+    <section class="auth-callback" *transloco="let t">
+      <p>{{ t('authCallback.signingIn') }}</p>
       @if (error) {
-      <p class="error">Auth failed: {{ error }}</p>
+      <p class="error">
+        {{ t('authCallback.error', { error }) }}
+      </p>
       }
     </section>
   `,
@@ -37,6 +40,7 @@ import { AuthService } from '../../services/auth.service';
 export class AuthCallbackComponent implements OnInit {
   private auth = inject(AuthService);
   private router = inject(Router);
+  private transloco = inject(TranslocoService);
   error: string | null = null;
 
   async ngOnInit() {
@@ -50,7 +54,9 @@ export class AuthCallbackComponent implements OnInit {
       await this.router.navigateByUrl('/home');
     } catch (err) {
       this.error =
-        err instanceof Error ? err.message : 'Could not complete sign-in';
+        err instanceof Error
+          ? err.message
+          : this.transloco.translate('authCallback.genericError');
     }
   }
 }

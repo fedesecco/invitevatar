@@ -19,6 +19,11 @@
           {
             "glob": "**/*",
             "input": "apps/invitevatar/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "public/i18n",
+            "output": "i18n"
           }
         ],
         "styles": ["apps/invitevatar/src/styles.scss"]

@@ -1,20 +1,23 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-auth-button',
   standalone: true,
-  imports: [],
+  imports: [TranslocoDirective],
   template: `
-    <button class="auth-btn" type="button" (click)="onClick()">
-      @if (auth.isAuthenticated()) {
-      <span class="avatar-circle">{{ initials(auth.user()?.email) }}</span>
-      <span>{{ auth.user()?.email }}</span>
-      <span class="action">Sign out</span>
-      } @else {
-      <span class="action">Login with Google</span>
-      }
-    </button>
+    <ng-container *transloco="let t">
+      <button class="auth-btn" type="button" (click)="onClick()">
+        @if (auth.isAuthenticated()) {
+        <span class="avatar-circle">{{ initials(auth.user()?.email) }}</span>
+        <span>{{ auth.user()?.email }}</span>
+        <span class="action">{{ t('auth.actions.signOut') }}</span>
+        } @else {
+        <span class="action">{{ t('auth.actions.loginGoogle') }}</span>
+        }
+      </button>
+    </ng-container>
   `,
   styles: [
     `

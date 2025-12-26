@@ -1,9 +1,9 @@
-<header class="toolbar">
+<header class="toolbar" *transloco="let t">
   @if(showMenu){
   <button
     class="menu-button"
     type="button"
-    aria-label="Toggle menu"
+    [attr.aria-label]="t('toolbar.aria.menu')"
     (click)="openMenu()"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -16,13 +16,13 @@
     </svg>
   </button>
   }
-  <div class="brand">Invitevatar</div>
+  <div class="brand">{{ t('toolbar.brand') }}</div>
   <div class="actions">
     <app-auth-button></app-auth-button>
     <button
       class="theme-toggle"
       (click)="toggleTheme()"
-      [attr.aria-label]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
+      [attr.aria-label]="t(isDarkMode() ? 'toolbar.theme.light' : 'toolbar.theme.dark')"
     >
       @if (isDarkMode()) {
       <!-- Sun Icon -->

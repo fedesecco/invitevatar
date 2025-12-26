@@ -1,12 +1,15 @@
-<section class="hero">
+<section class="hero" *transloco="let t">
   <div class="copy">
-    <h1>Bring your event to life with an Invitevatar</h1>
-    <p>Create an AI host, let guests chat, and share your invite with one link.</p>
+    <h1>{{ t('landing.title') }}</h1>
+    <p>{{ t('landing.subtitle') }}</p>
     <button class="cta" type="button" (click)="startLogin()">
-      @if (isAuthenticated()) { Continue } @else { Create your Invitevatar }
+      @if (isAuthenticated()) { {{ t('landing.cta.continue') }} } @else {
+      {{ t('landing.cta.create') }} }
     </button>
     @if (user()) {
-      <p class="welcome">Welcome back, {{ user()?.email }}.</p>
+      <p class="welcome">
+        {{ t('auth.welcomeBack', { email: user()?.email }) }}
+      </p>
     }
   </div>
 </section>
