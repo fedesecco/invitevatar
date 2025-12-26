@@ -1,10 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Signal,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -71,11 +66,10 @@ type SectionKey = 'avatars' | 'settings' | 'api-keys';
         ></app-toolbar>
 
         <main class="content">
-          @switch (activeSection()) {
-            @case ('avatars') { <app-avatars-section /> }
-            @case ('settings') { <app-settings-section /> }
-            @case ('api-keys') { <app-api-keys-section /> }
-          }
+          @switch (activeSection()) { @case ('avatars') {
+          <app-avatars-section /> } @case ('settings') {
+          <app-settings-section /> } @case ('api-keys') {
+          <app-api-keys-section /> } }
         </main>
       </mat-sidenav-content>
     </mat-sidenav-container>
@@ -100,7 +94,11 @@ type SectionKey = 'avatars' | 'settings' | 'api-keys';
         border-radius: 12px;
       }
       button[mat-list-item].active {
-        background: color-mix(in srgb, var(--md-sys-color-primary) 12%, transparent);
+        background: color-mix(
+          in srgb,
+          var(--md-sys-color-primary) 12%,
+          transparent
+        );
       }
       .content {
         padding: 1rem 1.5rem 2rem;
@@ -110,7 +108,7 @@ type SectionKey = 'avatars' | 'settings' | 'api-keys';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  activeSection: Signal<SectionKey> = signal<SectionKey>('avatars');
+  protected readonly activeSection = signal<SectionKey>('avatars');
 
   select(section: SectionKey) {
     this.activeSection.set(section);
