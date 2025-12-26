@@ -3,13 +3,13 @@ import { Landing } from '@views/landing/landing';
 
 export const appRoutes: Route[] = [
   {
-    path: '',
+    path: 'landing',
     component: Landing,
   },
   {
-    path: 'home',
-    loadComponent: () =>
-      import('@views/home/home').then((c) => c.HomeComponent),
+    path: '',
+    loadChildren: () =>
+      import('@views/home/home.routes').then((m) => m.homeRoutes),
   },
   {
     path: 'auth/callback',
@@ -17,5 +17,10 @@ export const appRoutes: Route[] = [
       import('@views/auth-callback/auth-callback').then(
         (c) => c.AuthCallbackComponent
       ),
+  },
+  {
+    path: '**',
+    redirectTo: 'landing',
+    pathMatch: 'full',
   },
 ];

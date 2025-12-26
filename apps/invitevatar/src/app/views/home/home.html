@@ -1,31 +1,34 @@
 <app-toolbar showMenuToggle />
 <ng-container *transloco="let t">
   <mat-sidenav-container class="layout">
-    <mat-sidenav #drawer class="side" mode="side" [opened]="true">
+    <mat-sidenav class="side" mode="side" [opened]="true">
       <div class="side-header">
         <h3>{{ t('home.nav.workspace') }}</h3>
       </div>
       <mat-nav-list>
         <button
           mat-list-item
-          [class.active]="activeSection() === 'avatars'"
-          (click)="select('avatars')"
+          routerLink="avatars"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           <mat-icon>smart_toy</mat-icon>
           <span>{{ t('home.nav.avatars') }}</span>
         </button>
         <button
           mat-list-item
-          [class.active]="activeSection() === 'settings'"
-          (click)="select('settings')"
+          routerLink="settings"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           <mat-icon>tune</mat-icon>
           <span>{{ t('home.nav.settings') }}</span>
         </button>
         <button
           mat-list-item
-          [class.active]="activeSection() === 'api-keys'"
-          (click)="select('api-keys')"
+          routerLink="api-keys"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           <mat-icon>key</mat-icon>
           <span>{{ t('home.nav.apiKeys') }}</span>
@@ -35,10 +38,7 @@
 
     <mat-sidenav-content>
       <main class="content">
-        @switch (activeSection()) { @case ('avatars') {
-        <app-avatars-section /> } @case ('settings') {
-        <app-settings-section /> } @case ('api-keys') {
-        <app-api-keys-section /> } }
+        <router-outlet></router-outlet>
       </main>
     </mat-sidenav-content>
   </mat-sidenav-container>
