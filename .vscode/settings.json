@@ -6,5 +6,6 @@
   },
   "chatgpt.commentCodeLensEnabled": false,
   "i18n-ally.localesPaths": ["public/i18n"],
-  "i18n-ally.sourceLanguage": "en"
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.keystyle": "flat"
 }

@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ToolbarComponent } from '@app/components/toolbar/toolbar';
 import { NavigationService } from '@app/services/navigation.service';
 import { Section } from '@app/shared/constants';
@@ -19,20 +13,9 @@ import { AuthService } from '@services/auth.service';
   styleUrl: './landing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Landing implements OnInit {
-  private auth = inject(AuthService);
-  private router = inject(Router);
+export class Landing {
   private navigation = inject(NavigationService);
-
-  isAuthenticated = this.auth.isAuthenticated;
-  user = this.auth.user;
-
-  async ngOnInit() {
-    await this.auth.ready();
-    if (this.auth.isAuthenticated()) {
-      await this.navigation.goToSection(Section.avatars);
-    }
-  }
+  protected auth = inject(AuthService);
 
   protected onCtaClick() {
     this.navigation.goToSection(Section.avatars);

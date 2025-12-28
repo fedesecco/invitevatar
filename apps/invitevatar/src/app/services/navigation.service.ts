@@ -7,6 +7,6 @@ export class NavigationService {
   private router = inject(Router);
 
   goToSection(section: Section): Promise<boolean> {
-    return this.router.navigateByUrl(`/home/${section}`);
+    return this.router.navigateByUrl(`/${section}`);
   }
 }
