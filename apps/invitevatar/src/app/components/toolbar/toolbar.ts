@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { AuthButtonComponent } from '@components/auth-button/auth-button';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { StateService } from '@services/state.service';
 import { ThemeService } from '@services/theme.service';
 
 @Component({
@@ -19,12 +20,9 @@ import { ThemeService } from '@services/theme.service';
 })
 export class ToolbarComponent {
   protected readonly themeService = inject(ThemeService);
+  protected readonly stateService = inject(StateService);
 
   public readonly showMenuToggle = input(false, {
     transform: booleanAttribute,
   });
-
-  toggleTheme() {
-    this.themeService.toggleTheme();
-  }
 }

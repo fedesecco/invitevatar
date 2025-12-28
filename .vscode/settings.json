@@ -4,5 +4,8 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always"
   },
-  "chatgpt.commentCodeLensEnabled": false
+  "chatgpt.commentCodeLensEnabled": false,
+  "i18n-ally.localesPaths": [
+    "public/i18n"
+  ]
 }
