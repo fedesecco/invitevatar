@@ -13,7 +13,12 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <mat-icon>smart_toy</mat-icon>
+          <span
+            class="iconify"
+            data-icon="ic:baseline-smart-toy"
+            matListItemIcon
+            aria-hidden="true"
+          ></span>
           <span>{{ t('home.nav.avatars') }}</span>
         </button>
         <button
@@ -22,7 +27,12 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <mat-icon>tune</mat-icon>
+          <span
+            class="iconify"
+            data-icon="ic:baseline-tune"
+            matListItemIcon
+            aria-hidden="true"
+          ></span>
           <span>{{ t('home.nav.settings') }}</span>
         </button>
         <button
@@ -31,7 +41,12 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <mat-icon>key</mat-icon>
+          <span
+            class="iconify"
+            data-icon="ic:baseline-vpn-key"
+            matListItemIcon
+            aria-hidden="true"
+          ></span>
           <span>{{ t('home.nav.apiKeys') }}</span>
         </button>
       </mat-nav-list>

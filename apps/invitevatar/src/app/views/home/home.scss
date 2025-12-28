@@ -23,6 +23,16 @@ button[mat-list-item].active {
   background: color-mix(in srgb, var(--md-sys-color-primary) 12%, transparent);
 }
 
+button[mat-list-item] .iconify {
+  font-size: 24px;
+  color: var(--md-sys-color-on-surface);
+  transition: color 0.2s ease;
+}
+
+:host-context([data-theme='dark']) button[mat-list-item] .iconify {
+  color: #fff;
+}
+
 .content {
   padding: 1rem 1.5rem 2rem;
 }

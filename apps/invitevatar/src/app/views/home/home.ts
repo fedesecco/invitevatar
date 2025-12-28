@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
@@ -15,7 +14,6 @@ import { StateService } from '@services/state.service';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule,
     TranslocoDirective,
     ToolbarComponent,
     RouterModule,
