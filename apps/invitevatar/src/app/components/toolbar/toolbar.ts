@@ -5,6 +5,8 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthButtonComponent } from '@components/auth-button/auth-button';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { StateService } from '@services/state.service';
@@ -13,7 +15,7 @@ import { ThemeService } from '@services/theme.service';
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [AuthButtonComponent, TranslocoDirective],
+  imports: [MatToolbarModule, MatButtonModule, AuthButtonComponent, TranslocoDirective],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,11 +1,12 @@
 .layout {
   height: 100vh;
-  background: var(--md-sys-color-surface);
+  background: var(--mat-sys-surface);
 }
 
 .side {
   width: 240px;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface);
 }
 
 .side-header {
@@ -17,15 +18,16 @@ button[mat-list-item] {
   width: 100%;
   text-align: left;
   border-radius: 12px;
+  color: var(--mat-sys-on-surface);
 }
 
 button[mat-list-item].active {
-  background: color-mix(in srgb, var(--md-sys-color-primary) 12%, transparent);
+  background: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
 }
 
 button[mat-list-item] .iconify {
   font-size: 24px;
-  color: var(--md-sys-color-on-surface);
+  color: var(--mat-sys-on-surface);
   transition: color 0.2s ease;
 }
 
@@ -35,4 +37,5 @@ button[mat-list-item] .iconify {
 
 .content {
   padding: 1rem 1.5rem 2rem;
+  background: var(--mat-sys-surface);
 }
