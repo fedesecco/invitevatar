@@ -18,9 +18,11 @@
     </button>
   }
   <span
-    class="text-xl font-semibold tracking-wide text-[var(--mat-sys-primary)]"
-    >{{ t('toolbar.brand') }}</span
+    class="text-xl font-semibold tracking-wide text-[var(--mat-sys-primary)] cursor-pointer"
+    (click)="router.navigateByUrl('landing')"
   >
+    {{ t('toolbar.brand') }}
+  </span>
   <span class="flex-1"></span>
   <div class="flex items-center gap-4">
     <app-auth-button></app-auth-button>

@@ -8,5 +8,12 @@
   "i18n-ally.localesPaths": ["public/i18n"],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "flat",
-  "prettier.prettierPath": "./node_modules/prettier/index.cjs"
+  "prettier.prettierPath": "./node_modules/prettier/index.cjs",
+  "files.associations": {
+    "*.scss": "scss"
+  },
+  "tailwindCSS.includeLanguages": {
+    "scss": "css"
+  },
+  "tailwindCSS.experimental.configFile": "tailwind.config.ts"
 }

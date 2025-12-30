@@ -10,7 +10,7 @@
         @for (route of menuRoutes; track route.data.labelKey) {
           <button
             mat-list-item
-            class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm text-[var(--mat-sys-on-surface)]"
+            class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm text-[var(--mat-sys-on-surface)] cursor-pointer"
             [routerLink]="route.path"
             [activated]="route.path === navigationService.activeSection()?.path"
           >
