@@ -19,7 +19,7 @@
     xPosition="after"
     yPosition="below"
   >
-    @for (lang of languageService.supportedLangs; track lang) {
+    @for (lang of otherLangs(); track lang) {
       <button
         mat-menu-item
         type="button"

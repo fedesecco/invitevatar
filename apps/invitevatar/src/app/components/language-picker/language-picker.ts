@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { Lang } from '@app/shared/constants';
@@ -20,6 +25,11 @@ const LANGUAGE_ICONS: Record<string, string> = {
 })
 export class LanguagePickerComponent {
   protected readonly languageService = inject(LanguageService);
+  protected readonly otherLangs = computed(() =>
+    this.languageService.supportedLangs.filter(
+      (lang) => lang !== this.languageService.activeLang(),
+    ),
+  );
 
   protected languageIcon(lang: Lang): string {
     return LANGUAGE_ICONS[lang] ?? 'solar:globe-2-bold-duotone';
