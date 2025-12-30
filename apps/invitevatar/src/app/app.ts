@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { LanguageService } from '@services/language.service';
 
 @Component({
   imports: [RouterModule],
@@ -7,4 +8,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {}
+export class App {
+  // Instantiate language service early to apply persisted language preference.
+  protected readonly languageService = inject(LanguageService);
+}

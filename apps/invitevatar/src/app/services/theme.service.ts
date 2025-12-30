@@ -5,7 +5,8 @@ import { effect, Injectable, signal } from '@angular/core';
 })
 export class ThemeService {
   public readonly isDarkMode = signal<boolean>(
-    window.matchMedia('(prefers-color-scheme: dark)').matches,
+    this.getStoredThemePreference() ??
+      window.matchMedia('(prefers-color-scheme: dark)').matches,
   );
 
   constructor() {
@@ -19,6 +20,37 @@ export class ThemeService {
   }
 
   public toggleTheme() {
-    this.isDarkMode.update((current) => !current);
+    this.isDarkMode.update((current) => {
+      const next = !current;
+      this.persistThemePreference(next);
+      return next;
+    });
+  }
+
+  private getStoredThemePreference(): boolean | null {
+    if (typeof localStorage === 'undefined') return null;
+
+    let storedTheme: string | null = null;
+    try {
+      storedTheme = localStorage.getItem('invitevatar.theme');
+    } catch {
+      return null;
+    }
+    if (!storedTheme) return null;
+
+    if (storedTheme === 'dark') return true;
+    if (storedTheme === 'light') return false;
+
+    return null;
+  }
+
+  private persistThemePreference(isDark: boolean) {
+    if (typeof localStorage === 'undefined') return;
+
+    try {
+      localStorage.setItem('invitevatar.theme', isDark ? 'dark' : 'light');
+    } catch {
+      /* no-op */
+    }
   }
 }

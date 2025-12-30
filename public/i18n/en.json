@@ -29,6 +29,7 @@
   },
   "home": {
     "nav": {
+      "invites": "Invites",
       "workspace": "Workspace",
       "avatars": "Avatars",
       "settings": "Settings",
