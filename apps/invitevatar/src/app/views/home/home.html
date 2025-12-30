@@ -7,48 +7,22 @@
       [opened]="stateService.isSidebarOpen()"
     >
       <mat-nav-list>
+        @for (route of menuRoutes; track route.data.labelKey){
         <button
           mat-list-item
-          routerLink="avatars"
+          [routerLink]="route.path"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <span
             class="iconify"
-            data-icon="ic:baseline-smart-toy"
+            [attr.data-icon]="route.data.icon"
             matListItemIcon
             aria-hidden="true"
           ></span>
-          <span>{{ t('home.nav.avatars') }}</span>
+          <span>{{ t(route.data.labelKey) }}</span>
         </button>
-        <button
-          mat-list-item
-          routerLink="settings"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <span
-            class="iconify"
-            data-icon="ic:baseline-tune"
-            matListItemIcon
-            aria-hidden="true"
-          ></span>
-          <span>{{ t('home.nav.settings') }}</span>
-        </button>
-        <button
-          mat-list-item
-          routerLink="api-keys"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <span
-            class="iconify"
-            data-icon="ic:baseline-vpn-key"
-            matListItemIcon
-            aria-hidden="true"
-          ></span>
-          <span>{{ t('home.nav.apiKeys') }}</span>
-        </button>
+        }
       </mat-nav-list>
     </mat-sidenav>
 

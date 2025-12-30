@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ToolbarComponent } from '@components/toolbar/toolbar';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { StateService } from '@services/state.service';
+import { HOME_NAV_ROUTES } from './home.routes';
 
 @Component({
   selector: 'app-home',
@@ -23,5 +24,6 @@ import { StateService } from '@services/state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
+  protected readonly menuRoutes = HOME_NAV_ROUTES;
   protected readonly stateService = inject(StateService);
 }
