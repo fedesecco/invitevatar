@@ -1,8 +1,8 @@
-import { effect, inject, Injectable, untracked } from '@angular/core';
+import { effect, inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Lang, SUPPORTED_LANGS } from '@app/shared/constants';
+import { DEFAULT_LANG, Lang, SUPPORTED_LANGS } from '@app/shared/constants';
 import { TranslocoService } from '@jsverse/transloco';
-import { map } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs';
 
 const LANGUAGE_STORAGE_KEY = 'invitevatar.lang';
 
@@ -12,7 +12,10 @@ export class LanguageService {
 
   public readonly supportedLangs = SUPPORTED_LANGS;
   public readonly activeLang = toSignal(
-    this.transloco.langChanges$.pipe(map(this.stringToLang)),
+    this.transloco.langChanges$.pipe(
+      map(this.stringToLang),
+      distinctUntilChanged(),
+    ),
     {
       initialValue: this.getInitialLang(),
     },
@@ -25,15 +28,7 @@ export class LanguageService {
     }
 
     effect(() => {
-      const lang = this.activeLang();
-      untracked(() => {
-        if (!lang) return;
-        try {
-          localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
-        } catch {
-          /* no-op */
-        }
-      });
+      localStorage.setItem(LANGUAGE_STORAGE_KEY, this.activeLang());
     });
   }
 
@@ -43,26 +38,21 @@ export class LanguageService {
     this.transloco.setActiveLang(lang);
   }
 
+  /** Converts a string | null to a Lang. If string is null or invalid, the default language will be returned */
+  public stringToLang(input: string | null): Lang {
+    return SUPPORTED_LANGS.map((l) => l.toString()).includes(input ?? '')
+      ? (input as Lang)
+      : DEFAULT_LANG;
+  }
+
   private getInitialLang(): Lang {
-    const stored = this.getStoredLanguage();
+    const stored = this.stringToLang(
+      localStorage.getItem(LANGUAGE_STORAGE_KEY),
+    );
     if (stored) return stored;
 
     const browserLang =
-      navigator.language?.toLowerCase().split('-')[0] ?? Lang.en;
+      navigator.language?.toLowerCase().split('-')[0] ?? DEFAULT_LANG;
     return this.stringToLang(browserLang);
-  }
-
-  private stringToLang(input: string | null): Lang {
-    return SUPPORTED_LANGS.map((l) => l.toString()).includes(input ?? '')
-      ? (input as Lang)
-      : Lang.en;
-  }
-
-  private getStoredLanguage(): Lang | null {
-    try {
-      return this.stringToLang(localStorage.getItem(LANGUAGE_STORAGE_KEY));
-    } catch {
-      return null;
-    }
   }
 }
