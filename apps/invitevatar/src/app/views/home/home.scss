@@ -9,32 +9,6 @@
   background: var(--mat-sys-surface);
 }
 
-.side-header {
-  padding: 1rem 1.25rem;
-  font-weight: 600;
-}
-
-button[mat-list-item] {
-  width: 100%;
-  text-align: left;
-  border-radius: 12px;
-  color: var(--mat-sys-on-surface);
-}
-
-button[mat-list-item].active {
-  background: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
-}
-
-button[mat-list-item] .iconify {
-  font-size: 24px;
-  color: var(--mat-sys-on-surface);
-  transition: color 0.2s ease;
-}
-
-:host-context([data-theme='dark']) button[mat-list-item] .iconify {
-  color: #fff;
-}
-
 .content {
   padding: 1rem 1.5rem 2rem;
   background: var(--mat-sys-surface);
