@@ -4,12 +4,9 @@ import { effect, Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ThemeService {
-  public readonly isDarkMode = signal<boolean>(false);
+  public readonly isDarkMode = signal<boolean>(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   constructor() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    this.isDarkMode.set(prefersDark);
-
     effect(() => {
       const isDark = this.isDarkMode();
       document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');

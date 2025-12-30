@@ -14,18 +14,26 @@
   <span class="spacer"></span>
   <div class="actions">
     <app-auth-button></app-auth-button>
+    @if (themeService.isDarkMode()) {
     <button
       mat-icon-button
       class="theme-toggle"
       type="button"
       (click)="themeService.toggleTheme()"
-      [attr.aria-label]="t(themeService.isDarkMode() ? 'toolbar.theme.light' : 'toolbar.theme.dark')"
+      [attr.aria-label]="t('toolbar.theme.light')"
     >
-      @if (themeService.isDarkMode()) {
       <span class="iconify" data-icon="solar:sun-2-line-duotone" aria-hidden="true"></span>
-      } @else {
-      <span class="iconify" data-icon="solar:moon-line-duotone" aria-hidden="true"></span>
-      }
     </button>
+    } @else {
+    <button
+      mat-icon-button
+      class="theme-toggle"
+      type="button"
+      (click)="themeService.toggleTheme()"
+      [attr.aria-label]="t('toolbar.theme.dark')"
+    >
+      <span class="iconify" data-icon="solar:moon-line-duotone" aria-hidden="true"></span>
+    </button>
+    }
   </div>
 </mat-toolbar>
