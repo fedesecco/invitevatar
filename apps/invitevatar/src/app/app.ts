@@ -6,7 +6,6 @@ import { LanguageService } from '@services/language.service';
   imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.scss',
 })
 export class App {
   // Instantiate language service early to apply persisted language preference.

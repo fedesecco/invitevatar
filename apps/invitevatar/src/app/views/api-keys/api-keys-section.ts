@@ -6,7 +6,6 @@ import { TranslocoDirective } from '@jsverse/transloco';
   standalone: true,
   imports: [TranslocoDirective],
   templateUrl: './api-keys-section.html',
-  styleUrl: './api-keys-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiKeysSectionComponent {}

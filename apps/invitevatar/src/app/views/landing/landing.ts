@@ -10,7 +10,6 @@ import { AuthService } from '@services/auth.service';
   standalone: true,
   imports: [TranslocoDirective, ToolbarComponent],
   templateUrl: './landing.html',
-  styleUrl: './landing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Landing {

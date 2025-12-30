@@ -2,12 +2,12 @@
   <button
     mat-icon-button
     type="button"
-    class="language-trigger"
+    class="text-[var(--mat-sys-on-surface-variant)] hover:bg-[color-mix(in_srgb,var(--mat-sys-on-surface)_8%,transparent)] transition-colors"
     [matMenuTriggerFor]="languageMenu"
     [attr.aria-label]="t('toolbar.language.aria')"
   >
     <span
-      class="iconify"
+      class="iconify text-[22px]"
       [attr.data-icon]="languageIcon(languageService.activeLang())"
       aria-hidden="true"
     ></span>
@@ -15,27 +15,30 @@
 
   <mat-menu
     #languageMenu="matMenu"
-    class="language-menu"
+    class="p-1 min-w-0"
     xPosition="after"
     yPosition="below"
   >
-    @for (lang of otherLangs(); track lang) {
-      <button
-        mat-menu-item
-        type="button"
-        (click)="selectLanguage(lang)"
-        [attr.aria-label]="
-          t('toolbar.language.switchTo', {
-            lang: t('toolbar.language.options.' + lang),
-          })
-        "
-      >
-        <span
-          class="iconify"
-          [attr.data-icon]="languageIcon(lang)"
-          aria-hidden="true"
-        ></span>
-      </button>
-    }
+    <div class="grid grid-cols-2 gap-1">
+      @for (lang of otherLangs(); track lang) {
+        <button
+          mat-menu-item
+          type="button"
+          class="flex h-12 w-12 items-center justify-center rounded-xl"
+          (click)="selectLanguage(lang)"
+          [attr.aria-label]="
+            t('toolbar.language.switchTo', {
+              lang: t('toolbar.language.options.' + lang),
+            })
+          "
+        >
+          <span
+            class="iconify text-[22px]"
+            [attr.data-icon]="languageIcon(lang)"
+            aria-hidden="true"
+          ></span>
+        </button>
+      }
+    </div>
   </mat-menu>
 </ng-container>

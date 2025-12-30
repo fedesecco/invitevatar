@@ -1,30 +1,40 @@
-<mat-toolbar class="toolbar" *transloco="let t">
+<mat-toolbar
+  class="sticky top-0 z-[1000] bg-[var(--mat-sys-surface)] text-[var(--mat-sys-on-surface)] shadow-[0_1px_0_var(--mat-sys-outline-variant)] transition-colors duration-300"
+  *transloco="let t"
+>
   @if (showMenuToggle()) {
     <button
       mat-icon-button
       type="button"
-      class="menu-button"
+      class="text-[var(--mat-sys-on-surface-variant)] hover:bg-[color-mix(in_srgb,var(--mat-sys-on-surface)_8%,transparent)]"
       [attr.aria-label]="t('toolbar.aria.menu')"
       (click)="stateService.isSidebarOpen.set(!stateService.isSidebarOpen())"
     >
-      <span class="iconify" data-icon="ic:round-menu" aria-hidden="true"></span>
+      <span
+        class="iconify text-2xl"
+        data-icon="ic:round-menu"
+        aria-hidden="true"
+      ></span>
     </button>
   }
-  <span class="brand">{{ t('toolbar.brand') }}</span>
-  <span class="spacer"></span>
-  <div class="actions">
+  <span
+    class="text-xl font-medium tracking-wide text-[var(--mat-sys-primary)]"
+    >{{ t('toolbar.brand') }}</span
+  >
+  <span class="flex-1"></span>
+  <div class="flex items-center gap-4">
     <app-auth-button></app-auth-button>
     <app-language-picker></app-language-picker>
     @if (themeService.isDarkMode()) {
       <button
         mat-icon-button
-        class="theme-toggle"
+        class="text-[var(--mat-sys-on-surface-variant)] hover:bg-[color-mix(in_srgb,var(--mat-sys-on-surface)_8%,transparent)]"
         type="button"
         (click)="themeService.toggleTheme()"
         [attr.aria-label]="t('toolbar.theme.light')"
       >
         <span
-          class="iconify"
+          class="iconify text-2xl"
           data-icon="solar:sun-2-line-duotone"
           aria-hidden="true"
         ></span>
@@ -32,13 +42,13 @@
     } @else {
       <button
         mat-icon-button
-        class="theme-toggle"
+        class="text-[var(--mat-sys-on-surface-variant)] hover:bg-[color-mix(in_srgb,var(--mat-sys-on-surface)_8%,transparent)]"
         type="button"
         (click)="themeService.toggleTheme()"
         [attr.aria-label]="t('toolbar.theme.dark')"
       >
         <span
-          class="iconify"
+          class="iconify text-2xl"
           data-icon="solar:moon-line-duotone"
           aria-hidden="true"
         ></span>

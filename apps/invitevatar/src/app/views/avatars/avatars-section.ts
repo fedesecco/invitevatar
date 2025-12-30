@@ -6,7 +6,6 @@ import { TranslocoDirective } from '@jsverse/transloco';
   standalone: true,
   imports: [TranslocoDirective],
   templateUrl: './avatars-section.html',
-  styleUrl: './avatars-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarsSectionComponent {}

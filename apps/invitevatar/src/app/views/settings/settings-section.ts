@@ -6,7 +6,6 @@ import { TranslocoDirective } from '@jsverse/transloco';
   standalone: true,
   imports: [TranslocoDirective],
   templateUrl: './settings-section.html',
-  styleUrl: './settings-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsSectionComponent {}

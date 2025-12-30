@@ -20,7 +20,6 @@ import { HOME_NAV_ROUTES } from './home.routes';
     RouterModule,
   ],
   templateUrl: './home.html',
-  styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {

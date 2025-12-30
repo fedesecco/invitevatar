@@ -20,7 +20,6 @@ const LANGUAGE_ICONS: Record<string, string> = {
   standalone: true,
   imports: [MatButtonModule, MatMenuModule, TranslocoDirective],
   templateUrl: './language-picker.html',
-  styleUrl: './language-picker.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguagePickerComponent {

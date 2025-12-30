@@ -24,7 +24,6 @@ import { ThemeService } from '@services/theme.service';
     TranslocoDirective,
   ],
   templateUrl: './toolbar.html',
-  styleUrl: './toolbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
