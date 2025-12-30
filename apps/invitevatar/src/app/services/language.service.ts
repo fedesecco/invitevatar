@@ -1,19 +1,22 @@
-import { effect, inject, Injectable } from '@angular/core';
+import { effect, inject, Injectable, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AvailableLangs, TranslocoService } from '@jsverse/transloco';
+import { Lang, SUPPORTED_LANGS } from '@app/shared/constants';
+import { TranslocoService } from '@jsverse/transloco';
+import { map } from 'rxjs';
 
 const LANGUAGE_STORAGE_KEY = 'invitevatar.lang';
-const FALLBACK_LANG = 'en';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly transloco = inject(TranslocoService);
-  private readonly supportedLangs = this.langDefinitionToStringArray(
-    this.transloco.getAvailableLangs(),
+
+  public readonly supportedLangs = SUPPORTED_LANGS;
+  public readonly activeLang = toSignal(
+    this.transloco.langChanges$.pipe(map(this.stringToLang)),
+    {
+      initialValue: this.getInitialLang(),
+    },
   );
-  private readonly activeLang = toSignal(this.transloco.langChanges$, {
-    initialValue: this.resolveInitialLang(),
-  });
 
   constructor() {
     const initialLang = this.activeLang();
@@ -23,45 +26,43 @@ export class LanguageService {
 
     effect(() => {
       const lang = this.activeLang();
-      if (!lang || !this.isSupported(lang)) return;
-      try {
-        localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
-      } catch {
-        /* no-op */
-      }
+      untracked(() => {
+        if (!lang) return;
+        try {
+          localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+        } catch {
+          /* no-op */
+        }
+      });
     });
   }
 
-  public setLanguage(lang: string) {
-    if (!this.isSupported(lang)) return;
+  public setLanguage(lang: Lang) {
     if (lang === this.transloco.getActiveLang()) return;
 
     this.transloco.setActiveLang(lang);
   }
 
-  private resolveInitialLang(): string {
+  private getInitialLang(): Lang {
     const stored = this.getStoredLanguage();
-    if (stored && this.isSupported(stored)) return stored;
+    if (stored) return stored;
 
-    const browserLang = navigator.language?.toLowerCase().split('-')[0] ?? null;
-    if (browserLang && this.isSupported(browserLang)) return browserLang;
-
-    return FALLBACK_LANG;
+    const browserLang =
+      navigator.language?.toLowerCase().split('-')[0] ?? Lang.en;
+    return this.stringToLang(browserLang);
   }
 
-  private getStoredLanguage(): string | null {
+  private stringToLang(input: string | null): Lang {
+    return SUPPORTED_LANGS.map((l) => l.toString()).includes(input ?? '')
+      ? (input as Lang)
+      : Lang.en;
+  }
+
+  private getStoredLanguage(): Lang | null {
     try {
-      return localStorage.getItem(LANGUAGE_STORAGE_KEY);
+      return this.stringToLang(localStorage.getItem(LANGUAGE_STORAGE_KEY));
     } catch {
       return null;
     }
-  }
-
-  private isSupported(lang: string): boolean {
-    return this.supportedLangs.includes(lang);
-  }
-
-  private langDefinitionToStringArray(langs: AvailableLangs): string[] {
-    return langs.map((lang) => (typeof lang === 'string' ? lang : lang.id));
   }
 }

@@ -1,0 +1,41 @@
+<ng-container *transloco="let t">
+  <button
+    mat-icon-button
+    type="button"
+    class="language-trigger"
+    [matMenuTriggerFor]="languageMenu"
+    [attr.aria-label]="t('toolbar.language.aria')"
+  >
+    <span
+      class="iconify"
+      [attr.data-icon]="languageIcon(languageService.activeLang())"
+      aria-hidden="true"
+    ></span>
+  </button>
+
+  <mat-menu
+    #languageMenu="matMenu"
+    class="language-menu"
+    xPosition="after"
+    yPosition="below"
+  >
+    @for (lang of languageService.supportedLangs; track lang) {
+      <button
+        mat-menu-item
+        type="button"
+        (click)="selectLanguage(lang)"
+        [attr.aria-label]="
+          t('toolbar.language.switchTo', {
+            lang: t('toolbar.language.options.' + lang),
+          })
+        "
+      >
+        <span
+          class="iconify"
+          [attr.data-icon]="languageIcon(lang)"
+          aria-hidden="true"
+        ></span>
+      </button>
+    }
+  </mat-menu>
+</ng-container>

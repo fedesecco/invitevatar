@@ -10,6 +10,14 @@
     "theme": {
       "light": "Passa al tema chiaro",
       "dark": "Passa al tema scuro"
+    },
+    "language": {
+      "aria": "Cambia lingua",
+      "switchTo": "Passa a {{lang}}",
+      "options": {
+        "en": "Inglese",
+        "it": "Italiano"
+      }
     }
   },
   "auth": {

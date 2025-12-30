@@ -8,6 +8,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthButtonComponent } from '@components/auth-button/auth-button';
+import { LanguagePickerComponent } from '@components/language-picker/language-picker';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { StateService } from '@services/state.service';
 import { ThemeService } from '@services/theme.service';
@@ -19,6 +20,7 @@ import { ThemeService } from '@services/theme.service';
     MatToolbarModule,
     MatButtonModule,
     AuthButtonComponent,
+    LanguagePickerComponent,
     TranslocoDirective,
   ],
   templateUrl: './toolbar.html',

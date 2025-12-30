@@ -10,6 +10,14 @@
     "theme": {
       "light": "Switch to light mode",
       "dark": "Switch to dark mode"
+    },
+    "language": {
+      "aria": "Change language",
+      "switchTo": "Switch to {{lang}}",
+      "options": {
+        "en": "English",
+        "it": "Italian"
+      }
     }
   },
   "auth": {

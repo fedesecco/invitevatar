@@ -1,0 +1,39 @@
+:host {
+  display: inline-flex;
+}
+
+.language-trigger {
+  color: var(--mat-sys-on-surface-variant);
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--mat-sys-on-surface) 8%,
+      transparent
+    );
+  }
+}
+
+::ng-deep .language-menu.mat-mdc-menu-panel {
+  min-width: unset;
+  padding: 0.25rem;
+}
+
+::ng-deep .language-menu .mat-mdc-menu-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+  gap: 0.25rem;
+  padding: 0;
+}
+
+::ng-deep .language-menu .mat-mdc-menu-item {
+  justify-content: center;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+  border-radius: 12px;
+}
+
+.iconify {
+  font-size: 22px;
+}
