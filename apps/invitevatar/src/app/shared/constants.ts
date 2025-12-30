@@ -4,6 +4,10 @@ export const supabaseConfig = {
   redirectPath: 'avatars',
 };
 
+export const supabaseTables = {
+  profiles: 'user_profiles',
+} as const;
+
 export enum Section {
   invites = 'invites',
   avatars = 'avatars',

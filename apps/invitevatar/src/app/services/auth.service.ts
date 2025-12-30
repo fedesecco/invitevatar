@@ -1,5 +1,5 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
-import { supabaseConfig } from '@app/shared/constants';
+import { supabaseConfig, supabaseTables } from '@app/shared/constants';
 import { createClient, OAuthResponse, Session } from '@supabase/supabase-js';
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +16,16 @@ export class AuthService {
   );
   private readonly sessionSignal = signal<Session | null>(null);
   public readonly user = computed(() => this.sessionSignal()?.user ?? null);
+  public readonly displayName = computed(() => {
+    const user = this.sessionSignal()?.user;
+    if (!user) return null;
+    const metadata = user.user_metadata ?? {};
+    const fullName =
+      (metadata['full_name'] as string | undefined) ??
+      (metadata['name'] as string | undefined);
+    if (fullName && fullName.trim()) return fullName;
+    return user.email ?? null;
+  });
   public readonly isAuthenticated = computed(() => !!this.user());
   private readonly readyPromise: Promise<void>;
 
@@ -28,6 +38,15 @@ export class AuthService {
         this.sessionSignal.set(session);
       });
       onCleanup(() => data.subscription.unsubscribe());
+    });
+
+    // Ensure a profile row exists/updates whenever auth changes.
+    effect(() => {
+      const user = this.user();
+      if (!user) return;
+      this.upsertProfile(user).catch((error) =>
+        console.error('Failed to sync profile', error),
+      );
     });
   }
 
@@ -69,5 +88,27 @@ export class AuthService {
 
   get supabase() {
     return this.client;
+  }
+
+  private async upsertProfile(user: {
+    id: string;
+    email?: string | null;
+    user_metadata?: Record<string, unknown>;
+  }) {
+    const displayName =
+      (user.user_metadata?.['full_name'] as string | undefined) ??
+      (user.email ? user.email.split('@')[0] : '');
+    const { error } = await this.client
+      .from(supabaseTables.profiles)
+      .upsert(
+        {
+          id: user.id,
+          email: user.email ?? '',
+          display_name: displayName ?? '',
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: 'id' },
+      );
+    if (error) throw error;
   }
 }

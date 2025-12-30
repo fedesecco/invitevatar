@@ -10,8 +10,10 @@ import { TranslocoDirective } from '@jsverse/transloco';
     <ng-container *transloco="let t">
       <button class="auth-btn" type="button" (click)="onClick()">
         @if (auth.isAuthenticated()) {
-          <span class="avatar-circle">{{ initials(auth.user()?.email) }}</span>
-          <span>{{ auth.user()?.email }}</span>
+          <span class="avatar-circle">
+            {{ initials(auth.displayName() ?? auth.user()?.email) }}
+          </span>
+          <span>{{ auth.displayName() ?? auth.user()?.email }}</span>
           <span class="action">{{ t('auth.actions.signOut') }}</span>
         } @else {
           <span class="action">{{ t('auth.actions.loginGoogle') }}</span>
@@ -66,9 +68,12 @@ export class AuthButtonComponent {
     }
   }
 
-  initials(email?: string | null) {
-    if (!email) return '?';
-    const [name] = email.split('@');
-    return name.slice(0, 2);
+  initials(nameOrEmail?: string | null) {
+    if (!nameOrEmail) return '?';
+    const base =
+      nameOrEmail.includes('@') && !nameOrEmail.includes(' ')
+        ? nameOrEmail.split('@')[0]
+        : nameOrEmail;
+    return base.slice(0, 2);
   }
 }
