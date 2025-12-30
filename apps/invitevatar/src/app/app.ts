@@ -9,5 +9,5 @@ import { LanguageService } from '@services/language.service';
 })
 export class App {
   // Instantiate language service early to apply persisted language preference.
-  protected readonly languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService);
 }

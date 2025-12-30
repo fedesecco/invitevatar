@@ -1,11 +1,9 @@
 <app-toolbar showMenuToggle />
 <ng-container *transloco="let t">
-  <mat-sidenav-container
-    class="h-screen bg-[var(--mat-sys-surface)]"
-  >
+  <mat-sidenav-container class="h-screen bg-[var(--mat-sys-surface)]">
     <mat-sidenav
-      class="w-60 border-r border-[var(--mat-sys-outline-variant)] bg-[var(--mat-sys-surface)]"
       mode="side"
+      [style.borderRight]="'1px solid var(--mat-sys-outline-variant)'"
       [opened]="stateService.isSidebarOpen()"
     >
       <mat-nav-list>
@@ -14,8 +12,7 @@
             mat-list-item
             class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm text-[var(--mat-sys-on-surface)]"
             [routerLink]="route.path"
-            routerLinkActive="bg-[color-mix(in_srgb,var(--mat-sys-primary)_10%,transparent)] text-[var(--mat-sys-primary)]"
-            [routerLinkActiveOptions]="{ exact: true }"
+            [activated]="route.path === navigationService.activeSection()?.path"
           >
             <span
               class="iconify text-lg"

@@ -2,9 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug frontend",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/apps/invitevatar/src"
+    },
+    {
       "type": "node",
       "request": "launch",
-      "name": "Debug api with Nx",
+      "name": "Debug backend",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["nx", "serve", "api"],
       "env": {

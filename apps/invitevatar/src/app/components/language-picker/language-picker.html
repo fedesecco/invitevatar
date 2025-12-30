@@ -2,7 +2,7 @@
   <button
     mat-icon-button
     type="button"
-    class="text-[var(--mat-sys-on-surface-variant)] hover:bg-[color-mix(in_srgb,var(--mat-sys-on-surface)_8%,transparent)] transition-colors"
+    class="text-[var(--mat-sys-on-surface-variant)] transition-colors hover:bg-[color-mix(in_srgb,var(--mat-sys-on-surface)_8%,transparent)]"
     [matMenuTriggerFor]="languageMenu"
     [attr.aria-label]="t('toolbar.language.aria')"
   >
@@ -15,7 +15,7 @@
 
   <mat-menu
     #languageMenu="matMenu"
-    class="p-1 min-w-0"
+    class="min-w-0 p-1"
     xPosition="after"
     yPosition="below"
   >

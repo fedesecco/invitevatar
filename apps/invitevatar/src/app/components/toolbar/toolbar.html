@@ -1,5 +1,5 @@
 <mat-toolbar
-  class="sticky top-0 z-[1000] bg-[var(--mat-sys-surface)] text-[var(--mat-sys-on-surface)] shadow-[0_1px_0_var(--mat-sys-outline-variant)] transition-colors duration-300"
+  class="sticky top-0 z-[1000] flex items-center gap-4 bg-[var(--mat-sys-surface)] text-[var(--mat-sys-on-surface)] shadow-[0_1px_0_var(--mat-sys-outline-variant)] transition-colors duration-300"
   *transloco="let t"
 >
   @if (showMenuToggle()) {
@@ -18,7 +18,7 @@
     </button>
   }
   <span
-    class="text-xl font-medium tracking-wide text-[var(--mat-sys-primary)]"
+    class="text-xl font-semibold tracking-wide text-[var(--mat-sys-primary)]"
     >{{ t('toolbar.brand') }}</span
   >
   <span class="flex-1"></span>
