@@ -1,0 +1,15 @@
+.layout {
+  height: 100vh;
+  background: var(--mat-sys-surface);
+}
+
+.side {
+  width: 240px;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface);
+}
+
+.content {
+  padding: 1rem 1.5rem 2rem;
+  background: var(--mat-sys-surface);
+}

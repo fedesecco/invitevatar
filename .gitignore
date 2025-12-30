@@ -43,6 +43,7 @@ Thumbs.db
 !.env.example
 apps/api/.env.local
 apps/api/.env
+notes.md
 
 .nx/cache
 .nx/workspace-data

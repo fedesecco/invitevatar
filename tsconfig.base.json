@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@app/*": ["apps/invitevatar/src/app/*"],
+      "@components/*": ["apps/invitevatar/src/app/components/*"],
+      "@views/*": ["apps/invitevatar/src/app/views/*"],
+      "@services/*": ["apps/invitevatar/src/app/services/*"],
+      "@guards/*": ["apps/invitevatar/src/app/guards/*"],
+      "@config/*": ["apps/invitevatar/src/app/config/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

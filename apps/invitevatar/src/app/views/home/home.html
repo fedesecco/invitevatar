@@ -1,0 +1,35 @@
+<app-toolbar showMenuToggle />
+<ng-container *transloco="let t">
+  <mat-sidenav-container class="layout">
+    <mat-sidenav
+      class="side"
+      mode="side"
+      [opened]="stateService.isSidebarOpen()"
+    >
+      <mat-nav-list>
+        @for (route of menuRoutes; track route.data.labelKey) {
+          <button
+            mat-list-item
+            [routerLink]="route.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <span
+              class="iconify"
+              [attr.data-icon]="route.data.icon"
+              matListItemIcon
+              aria-hidden="true"
+            ></span>
+            <span>{{ t(route.data.labelKey) }}</span>
+          </button>
+        }
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <main class="content">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

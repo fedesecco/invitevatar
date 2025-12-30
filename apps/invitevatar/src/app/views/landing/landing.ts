@@ -1,22 +1,23 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { ToolbarComponent } from '@app/components/toolbar/toolbar';
+import { NavigationService } from '@app/services/navigation.service';
+import { Section } from '@app/shared/constants';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [TranslocoDirective, ToolbarComponent],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Landing {
-  private auth = inject(AuthService);
+  private navigation = inject(NavigationService);
+  protected auth = inject(AuthService);
 
-  isAuthenticated = this.auth.isAuthenticated;
-  user = this.auth.user;
-
-  startLogin() {
-    this.auth.signInWithGoogle();
+  protected onCtaClick() {
+    this.navigation.goToSection(Section.avatars);
   }
 }

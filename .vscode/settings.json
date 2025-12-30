@@ -4,5 +4,9 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always"
   },
-  "chatgpt.commentCodeLensEnabled": false
+  "chatgpt.commentCodeLensEnabled": false,
+  "i18n-ally.localesPaths": ["public/i18n"],
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.keystyle": "flat",
+  "prettier.prettierPath": "./node_modules/prettier/index.cjs"
 }

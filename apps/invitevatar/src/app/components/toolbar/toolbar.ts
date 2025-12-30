@@ -1,22 +1,35 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AuthButtonComponent } from '../auth-button/auth-button';
-import { ThemeService } from '../../services/theme.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  booleanAttribute,
+  inject,
+  input,
+} from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthButtonComponent } from '@components/auth-button/auth-button';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { StateService } from '@services/state.service';
+import { ThemeService } from '@services/theme.service';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [CommonModule, AuthButtonComponent],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    AuthButtonComponent,
+    TranslocoDirective,
+  ],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
-  private themeService = inject(ThemeService);
-  
-  isDarkMode = this.themeService.isDarkMode;
+  protected readonly themeService = inject(ThemeService);
+  protected readonly stateService = inject(StateService);
 
-  toggleTheme() {
-    this.themeService.toggleTheme();
-  }
+  public readonly showMenuToggle = input(false, {
+    transform: booleanAttribute,
+  });
 }

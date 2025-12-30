@@ -1,6 +1,6 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
+import { supabaseConfig } from '@app/shared/constants';
 import { createClient, OAuthResponse, Session } from '@supabase/supabase-js';
-import { supabaseConfig } from '../config/supabase.config';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -12,14 +12,15 @@ export class AuthService {
         persistSession: true,
         autoRefreshToken: true,
       },
-    }
+    },
   );
   private readonly sessionSignal = signal<Session | null>(null);
   public readonly user = computed(() => this.sessionSignal()?.user ?? null);
   public readonly isAuthenticated = computed(() => !!this.user());
+  private readonly readyPromise: Promise<void>;
 
   constructor() {
-    this.bootstrapSession();
+    this.readyPromise = this.bootstrapSession();
 
     // Keep local state in sync with auth events.
     effect((onCleanup) => {
@@ -37,10 +38,14 @@ export class AuthService {
     }
   }
 
+  public async ready(): Promise<void> {
+    await this.readyPromise;
+  }
+
   public signInWithGoogle(): Promise<OAuthResponse> {
     const redirectTo = new URL(
       supabaseConfig.redirectPath,
-      window.location.origin
+      window.location.origin,
     ).toString();
     return this.client.auth.signInWithOAuth({
       provider: 'google',
@@ -49,9 +54,8 @@ export class AuthService {
   }
 
   public async handleCallbackFromUrl(currentUrl: string): Promise<Session> {
-    const { data, error } = await this.client.auth.exchangeCodeForSession(
-      currentUrl
-    );
+    const { data, error } =
+      await this.client.auth.exchangeCodeForSession(currentUrl);
     if (error) throw error;
     this.sessionSignal.set(data.session);
     return data.session;

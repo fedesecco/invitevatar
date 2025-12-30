@@ -1,14 +1,19 @@
 import { Route } from '@angular/router';
-import { Landing } from './views/landing/landing';
-import { AuthCallbackComponent } from './views/auth-callback/auth-callback';
+import { Landing } from '@views/landing/landing';
 
 export const appRoutes: Route[] = [
   {
-    path: '',
+    path: 'landing',
     component: Landing,
   },
   {
-    path: 'auth/callback',
-    component: AuthCallbackComponent,
+    path: '',
+    loadChildren: () =>
+      import('@views/home/home.routes').then((m) => m.homeRoutes),
+  },
+  {
+    path: '**',
+    redirectTo: 'landing',
+    pathMatch: 'full',
   },
 ];
