@@ -4,13 +4,16 @@
     <h1>{{ t('landing.title') }}</h1>
     <p>{{ t('landing.subtitle') }}</p>
     <button class="cta" type="button" (click)="onCtaClick()">
-      @if (auth.isAuthenticated()) { {{ t('landing.cta.continue') }} } @else {
-      {{ t('landing.cta.create') }} }
+      @if (auth.isAuthenticated()) {
+        {{ t('landing.cta.continue') }}
+      } @else {
+        {{ t('landing.cta.create') }}
+      }
     </button>
     @if (auth.user()) {
-    <p class="welcome">
-      {{ t('auth.welcomeBack', { email: auth.user()?.email }) }}
-    </p>
+      <p class="welcome">
+        {{ t('auth.welcomeBack', { email: auth.user()?.email }) }}
+      </p>
     }
   </div>
 </section>

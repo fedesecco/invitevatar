@@ -8,7 +8,7 @@ export const HOME_NAV_ROUTES: AppSection[] = [
     path: Section.invites,
     loadComponent: () =>
       import('@views/settings/settings-section').then(
-        (m) => m.SettingsSectionComponent
+        (m) => m.SettingsSectionComponent,
       ),
     data: {
       icon: 'ic:baseline-mail',
@@ -19,7 +19,7 @@ export const HOME_NAV_ROUTES: AppSection[] = [
     path: Section.avatars,
     loadComponent: () =>
       import('@views/avatars/avatars-section').then(
-        (m) => m.AvatarsSectionComponent
+        (m) => m.AvatarsSectionComponent,
       ),
     data: {
       icon: 'ic:baseline-smart-toy',
@@ -30,7 +30,7 @@ export const HOME_NAV_ROUTES: AppSection[] = [
     path: Section.settings,
     loadComponent: () =>
       import('@views/settings/settings-section').then(
-        (m) => m.SettingsSectionComponent
+        (m) => m.SettingsSectionComponent,
       ),
     data: {
       icon: 'ic:baseline-tune',
@@ -41,7 +41,7 @@ export const HOME_NAV_ROUTES: AppSection[] = [
     path: Section.apiKeys,
     loadComponent: () =>
       import('@views/api-keys/api-keys-section').then(
-        (m) => m.ApiKeysSectionComponent
+        (m) => m.ApiKeysSectionComponent,
       ),
     data: {
       icon: 'ic:baseline-vpn-key',

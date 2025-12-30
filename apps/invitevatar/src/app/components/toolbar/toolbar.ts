@@ -15,7 +15,12 @@ import { ThemeService } from '@services/theme.service';
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, AuthButtonComponent, TranslocoDirective],
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    AuthButtonComponent,
+    TranslocoDirective,
+  ],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -10,11 +10,11 @@ import { TranslocoDirective } from '@jsverse/transloco';
     <ng-container *transloco="let t">
       <button class="auth-btn" type="button" (click)="onClick()">
         @if (auth.isAuthenticated()) {
-        <span class="avatar-circle">{{ initials(auth.user()?.email) }}</span>
-        <span>{{ auth.user()?.email }}</span>
-        <span class="action">{{ t('auth.actions.signOut') }}</span>
+          <span class="avatar-circle">{{ initials(auth.user()?.email) }}</span>
+          <span>{{ auth.user()?.email }}</span>
+          <span class="action">{{ t('auth.actions.signOut') }}</span>
         } @else {
-        <span class="action">{{ t('auth.actions.loginGoogle') }}</span>
+          <span class="action">{{ t('auth.actions.loginGoogle') }}</span>
         }
       </button>
     </ng-container>

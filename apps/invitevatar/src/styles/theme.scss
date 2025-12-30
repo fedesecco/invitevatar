@@ -29,5 +29,7 @@ body {
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-large, 400 1rem/1.5 'Roboto', sans-serif);
   margin: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }

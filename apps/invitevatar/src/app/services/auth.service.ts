@@ -12,7 +12,7 @@ export class AuthService {
         persistSession: true,
         autoRefreshToken: true,
       },
-    }
+    },
   );
   private readonly sessionSignal = signal<Session | null>(null);
   public readonly user = computed(() => this.sessionSignal()?.user ?? null);
@@ -45,7 +45,7 @@ export class AuthService {
   public signInWithGoogle(): Promise<OAuthResponse> {
     const redirectTo = new URL(
       supabaseConfig.redirectPath,
-      window.location.origin
+      window.location.origin,
     ).toString();
     return this.client.auth.signInWithOAuth({
       provider: 'google',
@@ -54,9 +54,8 @@ export class AuthService {
   }
 
   public async handleCallbackFromUrl(currentUrl: string): Promise<Session> {
-    const { data, error } = await this.client.auth.exchangeCodeForSession(
-      currentUrl
-    );
+    const { data, error } =
+      await this.client.auth.exchangeCodeForSession(currentUrl);
     if (error) throw error;
     this.sessionSignal.set(data.session);
     return data.session;
