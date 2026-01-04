@@ -54,7 +54,18 @@
       },
       "apiKeys": {
         "title": "API Keys",
-        "description": "API keys and integrations will appear here."
+        "description": "Store your OpenAI API key securely so we can create avatars on your behalf.",
+        "form": {
+          "apiKeyLabel": "API key",
+          "apiKeyPlaceholder": "sk-...",
+          "apiKeyError": "Enter a valid key (10+ characters).",
+          "label": "Label",
+          "labelPlaceholder": "e.g. Personal OpenAI key",
+          "optional": "(optional)",
+          "saveCta": "Save key",
+          "saving": "Saving...",
+          "saved": "Saved"
+        }
       }
     }
   },

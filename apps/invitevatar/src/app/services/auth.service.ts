@@ -61,6 +61,20 @@ export class AuthService {
     await this.readyPromise;
   }
 
+  public async getAccessToken(): Promise<string | null> {
+    await this.ready();
+    const current = this.sessionSignal();
+    if (current?.access_token) return current.access_token;
+
+    const { data, error } = await this.client.auth.getSession();
+    if (error) {
+      console.error('Failed to fetch session', error);
+      return null;
+    }
+    this.sessionSignal.set(data.session);
+    return data.session?.access_token ?? null;
+  }
+
   public signInWithGoogle(): Promise<OAuthResponse> {
     const redirectTo = new URL(
       supabaseConfig.redirectPath,

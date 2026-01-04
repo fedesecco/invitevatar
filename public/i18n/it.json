@@ -54,7 +54,18 @@
       },
       "apiKeys": {
         "title": "Chiavi API",
-        "description": "Qui troverai le chiavi API e le integrazioni."
+        "description": "Salva in modo sicuro la tua chiave OpenAI per creare avatar per te.",
+        "form": {
+          "apiKeyLabel": "Chiave API",
+          "apiKeyPlaceholder": "sk-...",
+          "apiKeyError": "Inserisci una chiave valida (almeno 10 caratteri).",
+          "label": "Etichetta",
+          "labelPlaceholder": "es. Chiave OpenAI personale",
+          "optional": "(opzionale)",
+          "saveCta": "Salva chiave",
+          "saving": "Salvataggio...",
+          "saved": "Salvata"
+        }
       }
     }
   },

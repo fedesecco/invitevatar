@@ -60,7 +60,8 @@
           "buildTarget": "invitevatar:build:production"
         },
         "development": {
-          "buildTarget": "invitevatar:build:development"
+          "buildTarget": "invitevatar:build:development",
+          "proxyConfig": "apps/invitevatar/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"
