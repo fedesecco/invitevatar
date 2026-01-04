@@ -2,6 +2,9 @@
   "app": {
     "name": "Invitevatar"
   },
+  "common": {
+    "cancel": "Cancel"
+  },
   "toolbar": {
     "brand": "Invitevatar",
     "aria": {
@@ -62,9 +65,31 @@
           "label": "Label",
           "labelPlaceholder": "e.g. Personal OpenAI key",
           "optional": "(optional)",
+          "labelError": "Enter a label.",
           "saveCta": "Save key",
           "saving": "Saving...",
           "saved": "Saved"
+        },
+        "dialogs": {
+          "addCta": "Add key",
+          "addTitle": "Add API key",
+          "renameTitle": "Rename key",
+          "renameCta": "Save label",
+          "deleteTitle": "Delete key",
+          "deletePrompt": "Delete “{{label}}”?",
+          "deleteCta": "Delete"
+        },
+        "table": {
+          "label": "Label",
+          "provider": "Provider",
+          "created": "Created",
+          "actions": "Actions",
+          "rename": "Rename",
+          "delete": "Delete"
+        },
+        "states": {
+          "loading": "Loading keys...",
+          "empty": "No API keys yet. Add one to get started."
         }
       }
     }

@@ -3,11 +3,13 @@ import {
   UnauthorizedException,
   InternalServerErrorException,
   BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 import { SupabaseService } from '../supabase/supabase.service';
 import { SaveApiKeyDto } from './dto/save-api-key.dto';
+import { UpdateApiKeyLabelDto } from './dto/update-api-key-label.dto';
 
 @Injectable()
 export class ApiKeysService {
@@ -88,6 +90,84 @@ export class ApiKeysService {
 
     if (error) {
       throw new InternalServerErrorException(error.message);
+    }
+
+    return { ok: true };
+  }
+
+  async list(authHeader: string | undefined) {
+    const userId = await this.getUserIdFromAuth(authHeader);
+    const client = this.supabase.getClient();
+    const { data, error } = await client
+      .from('user_api_keys')
+      .select('id, provider, key_label, created_at, updated_at')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+
+    return (
+      data?.map((row) => ({
+        id: row.id as string,
+        provider: (row.provider as string) ?? 'openai',
+        label: (row.key_label as string | null) ?? null,
+        createdAt: row.created_at as string,
+        updatedAt: row.updated_at as string,
+      })) ?? []
+    );
+  }
+
+  async updateLabel(
+    authHeader: string | undefined,
+    id: string,
+    dto: UpdateApiKeyLabelDto,
+  ) {
+    const userId = await this.getUserIdFromAuth(authHeader);
+    const label = dto.label.trim();
+    if (!label) {
+      throw new BadRequestException('Label cannot be empty');
+    }
+
+    const client = this.supabase.getClient();
+    const { data, error } = await client
+      .from('user_api_keys')
+      .update({ key_label: label })
+      .eq('id', id)
+      .eq('user_id', userId)
+      .select('id')
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        throw new NotFoundException('API key not found');
+      }
+      throw new InternalServerErrorException(error.message);
+    }
+
+    if (!data) {
+      throw new NotFoundException('API key not found');
+    }
+
+    return { ok: true };
+  }
+
+  async delete(authHeader: string | undefined, id: string) {
+    const userId = await this.getUserIdFromAuth(authHeader);
+    const client = this.supabase.getClient();
+    const { error, count } = await client
+      .from('user_api_keys')
+      .delete({ count: 'exact' })
+      .eq('id', id)
+      .eq('user_id', userId);
+
+    if (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+
+    if (!count) {
+      throw new NotFoundException('API key not found');
     }
 
     return { ok: true };

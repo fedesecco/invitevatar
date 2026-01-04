@@ -1,60 +1,112 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { ApiKeysService } from '@app/services/api-keys.service';
+import { ApiKeyRow, ApiKeysService } from '@app/services/api-keys.service';
+import { AddApiKeyDialogComponent } from './add-api-key-dialog';
+import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog';
+import { RenameApiKeyDialogComponent } from './rename-api-key-dialog';
 
 @Component({
   selector: 'app-api-keys-section',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslocoDirective],
+  imports: [
+    CommonModule,
+    TranslocoDirective,
+    MatTableModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './api-keys-section.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApiKeysSectionComponent {
-  private readonly fb = inject(FormBuilder);
+export class ApiKeysSectionComponent implements OnInit {
   private readonly apiKeys = inject(ApiKeysService);
+  private readonly dialog = inject(MatDialog);
 
-  readonly form = this.fb.nonNullable.group({
-    apiKey: ['', [Validators.required, Validators.minLength(10)]],
-    label: [''],
-  });
-
-  readonly saving = signal(false);
-  readonly saved = signal(false);
+  readonly loading = signal(false);
   readonly errorMessage = signal<string | null>(null);
+  readonly rows = signal<ApiKeyRow[]>([]);
+  readonly displayedColumns = ['label', 'provider', 'createdAt', 'actions'];
+  readonly isEmpty = computed(() => !this.loading() && this.rows().length === 0);
 
-  constructor() {
-    this.form.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => {
-        if (this.saved()) this.saved.set(false);
-        if (this.errorMessage()) this.errorMessage.set(null);
-      });
+  ngOnInit() {
+    this.loadKeys();
   }
 
-  async saveApiKey() {
-    this.form.markAllAsTouched();
-    this.saved.set(false);
+  async loadKeys() {
+    this.loading.set(true);
     this.errorMessage.set(null);
-
-    if (this.form.invalid) return;
-
-    const { apiKey, label } = this.form.getRawValue();
-    this.saving.set(true);
-
     try {
-      await this.apiKeys.saveKey({ apiKey, label: label?.trim() || null });
-      this.saved.set(true);
-      this.form.reset({ apiKey: '', label: '' });
+      const data = await this.apiKeys.list();
+      this.rows.set(data);
     } catch (error: unknown) {
       const message =
-        error instanceof Error ? error.message : 'Could not save API key.';
+        error instanceof Error ? error.message : 'Could not load API keys.';
       this.errorMessage.set(message);
-      console.error('Failed to save API key', error);
+      console.error('Failed to load API keys', error);
     } finally {
-      this.saving.set(false);
+      this.loading.set(false);
     }
+  }
+
+  openAddDialog() {
+    const ref = this.dialog.open(AddApiKeyDialogComponent, {
+      width: '420px',
+      autoFocus: true,
+    });
+    ref.afterClosed().pipe(takeUntilDestroyed()).subscribe((result) => {
+      if (result === 'saved') {
+        this.loadKeys();
+      }
+    });
+  }
+
+  renameKey(row: ApiKeyRow) {
+    const ref = this.dialog.open(RenameApiKeyDialogComponent, {
+      width: '360px',
+      data: { id: row.id, currentLabel: row.label },
+    });
+    ref.afterClosed().pipe(takeUntilDestroyed()).subscribe((result) => {
+      if (result === 'renamed') {
+        this.loadKeys();
+      }
+    });
+  }
+
+  confirmDelete(row: ApiKeyRow) {
+    const ref = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '360px',
+      data: { label: row.label ?? row.provider },
+    });
+    ref.afterClosed().pipe(takeUntilDestroyed()).subscribe(async (confirmed) => {
+      if (!confirmed) return;
+      this.loading.set(true);
+      try {
+        await this.apiKeys.delete(row.id);
+        await this.loadKeys();
+      } catch (error: unknown) {
+        const message =
+          error instanceof Error ? error.message : 'Could not delete API key.';
+        this.errorMessage.set(message);
+        console.error('Failed to delete API key', error);
+      } finally {
+        this.loading.set(false);
+      }
+    });
   }
 }

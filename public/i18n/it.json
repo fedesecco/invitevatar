@@ -2,6 +2,9 @@
   "app": {
     "name": "Invitevatar"
   },
+  "common": {
+    "cancel": "Annulla"
+  },
   "toolbar": {
     "brand": "Invitevatar",
     "aria": {
@@ -62,9 +65,31 @@
           "label": "Etichetta",
           "labelPlaceholder": "es. Chiave OpenAI personale",
           "optional": "(opzionale)",
+          "labelError": "Inserisci un'etichetta.",
           "saveCta": "Salva chiave",
           "saving": "Salvataggio...",
           "saved": "Salvata"
+        },
+        "dialogs": {
+          "addCta": "Aggiungi chiave",
+          "addTitle": "Aggiungi chiave API",
+          "renameTitle": "Rinomina chiave",
+          "renameCta": "Salva etichetta",
+          "deleteTitle": "Elimina chiave",
+          "deletePrompt": "Eliminare “{{label}}”?",
+          "deleteCta": "Elimina"
+        },
+        "table": {
+          "label": "Etichetta",
+          "provider": "Provider",
+          "created": "Creata il",
+          "actions": "Azioni",
+          "rename": "Rinomina",
+          "delete": "Elimina"
+        },
+        "states": {
+          "loading": "Caricamento chiavi...",
+          "empty": "Nessuna chiave API. Aggiungine una per iniziare."
         }
       }
     }
